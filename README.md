@@ -1,23 +1,27 @@
-# 🎓 工程數學作業：拉普拉斯反轉換求解
+# 工程數學作業：拉普拉斯反轉換求解
 
-**班級學號：** 11424141  
+**學號：** 11424141  
 **姓名：** 林誠佑  
 
 ---
 
-## 📝 題目描述
+## 題目描述
 求解下列拉普拉斯反轉換方程：
 
-$$\mathcal{L}^{-1} \left\{ \frac{1 - e^{-3s}}{s(s+4)} \right\}$$
+$$
+\mathcal{L}^{-1} \{ \frac{1 - e^{-3s}}{s(s+4)} \}
+$$
 
 ---
 
-## 📊 詳細求解步驟
+## 詳細求解步驟
 
 ### Step 1: 拆解分子與項次
 首先，我們將分子的 $1$ 與 $e^{-3s}$ 分開，將整個式子拆解為兩個獨立的反轉換項：
 
-$$\mathcal{L}^{-1} \left\{ \frac{1}{s(s+4)} \right\} - \mathcal{L}^{-1} \left\{ \frac{e^{-3s}}{s(s+4)} \right\}$$
+$$
+\mathcal{L}^{-1} \{ \frac{1}{s(s+4)} \} - \mathcal{L}^{-1} \{ \frac{e^{-3s}}{s(s+4)} \}
+$$
 
 我們可以發現，兩項都含有基礎項 $\frac{1}{s(s+4)}$。因此，我們只要先求出它的反轉換，再利用平移定理處理第二項即可。
 
@@ -26,7 +30,9 @@ $$\mathcal{L}^{-1} \left\{ \frac{1}{s(s+4)} \right\} - \mathcal{L}^{-1} \left\{ 
 ### Step 2: 基礎項的部分分式拆解 (Partial Fraction Decomposition)
 針對基礎項 $F(s) = \frac{1}{s(s+4)}$ 進行部分分式拆解：
 
-$$\frac{1}{s(s+4)} = \frac{A}{s} + \frac{B}{s+4}$$
+$$
+\frac{1}{s(s+4)} = \frac{A}{s} + \frac{B}{s+4}
+$$
 
 利用代入法（Heaviside 蓋住法）求係數 $A$ 與 $B$：
 * **求 $A$：** 令 $s = 0$，得 $A = \frac{1}{0 + 4} = \frac{1}{4}$
@@ -34,34 +40,56 @@ $$\frac{1}{s(s+4)} = \frac{A}{s} + \frac{B}{s+4}$$
 
 因此，部分分式拆解結果為：
 
-$$\frac{1}{s(s+4)} = \frac{1}{4} \cdot \frac{1}{s} - \frac{1}{4} \cdot \frac{1}{s+4}$$
+$$
+\frac{1}{s(s+4)} = \frac{1}{4} \cdot \frac{1}{s} - \frac{1}{4} \cdot \frac{1}{s+4}
+$$
 
 ---
 
 ### Step 3: 計算第一項的反轉換
 對拆解後的基礎項取反拉普拉斯變換，設其時域函數為 $f(t)$：
 
-$$f(t) = \mathcal{L}^{-1} \left\{ \frac{1}{4s} - \frac{1}{4(s+4)} \right\}$$
+$$
+f(t) = \mathcal{L}^{-1} \{ \frac{1}{4s} - \frac{1}{4(s+4)} \}
+$$
 
 根據基本轉換公式 $\mathcal{L}^{-1}\{\frac{1}{s}\} = 1$ 與 $\mathcal{L}^{-1}\{\frac{1}{s-a}\} = e^{at}$，可得：
 
-$$f(t) = \frac{1}{4} - \frac{1}{4}e^{-4t}$$
+$$
+f(t) = \frac{1}{4} - \frac{1}{4}e^{-4t}
+$$
 
 ---
 
 ### Step 4: 套用第二平移定理處理延遲項
-針對第二項 $\mathcal{L}^{-1} \left\{ \frac{e^{-3s}}{s(s+4)} \right\}$，由於分子帶有指數函數 $e^{-3s}$，我們必須套用**第二平移定理**：
+針對第二項 $\mathcal{L}^{-1} \{ \frac{e^{-3s}}{s(s+4)} \}$，由於分子帶有指數函數 $e^{-3s}$，我們必須套用**第二平移定理**：
 
-$$\mathcal{L}^{-1} \left\{ e^{-as} F(s) \right\} = f(t-a) \cdot u(t-a)$$
+$$
+\mathcal{L}^{-1} \{ e^{-as} F(s) \} = f(t-a) \cdot u(t-a)
+$$
 
 在此處 $a = 3$，而基礎函數 $f(t) = \frac{1}{4} - \frac{1}{4}e^{-4t}$。我們將 $f(t)$ 中的 $t$ 替換成 $(t-3)$，並乘上單位階梯函數 $u(t-3)$：
 
-$$\mathcal{L}^{-1} \left\{ \frac{e^{-3s}}{s(s+4)} \right\} = \left[ \frac{1}{4} - \frac{1}{4}e^{-4(t-3)} \right] u(t-3)$$
+$$
+\mathcal{L}^{-1} \{ \frac{e^{-3s}}{s(s+4)} \} = [ \frac{1}{4} - \frac{1}{4}e^{-4(t-3)} ] u(t-3)
+$$
 
 ---
 
-## 🎯 最終答案
+## 最終答案
 
-將 Step 3 與 Step 4 的結果合併，即為本題的最終求解結果：
+將推導結果合併後，本題的最終求解結果可以寫成傳統的時域函數形式：
 
-$$\mathcal{L}^{-1} \left\{ \frac{1 - e^{-3s}}{s(s+4)} \right\} = \left( \frac{1}{4} - \frac{1}{4}e^{-4t} \right) - \left( \frac{1}{4} - \frac{1}{4}e^{-4(t-3)} \right) u(t-3)$$
+$$
+f(t) = \left( \frac{1}{4} - \frac{1}{4}e^{-4t} \right) - \left( \frac{1}{4} - \frac{1}{4}e^{-4(t-3)} \right) u(t-3)
+$$
+
+如果將單位階梯函數 $u(t-3)$ 分段函數形式展開 則如下：
+
+$$
+f(t) = 
+\begin{cases} 
+\frac{1}{4} - \frac{1}{4}e^{-4t}, & 0 \le t < 3 \\ 
+\frac{1}{4}e^{-4(t-3)} - \frac{1}{4}e^{-4t}, & t \ge 3
+\end{cases}
+$$
